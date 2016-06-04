@@ -5,6 +5,7 @@ const { computed, Service, inject } = Ember;
 
 const DEFAULT_CONFIG = {
   props: ['description', 'title', 'image', 'url', 'twitterHandle'],
+  current: {},
   metaTagDescriptions: [
     { namePropertyKey: 'name',
       namePropertyValue: 'twitter:card',
@@ -53,7 +54,7 @@ const DEFAULT_CONFIG = {
 };
 
 function getProp(propName) {
-  let currentPropKey = `current${propName}`;
+  let currentPropKey = `current.${propName}`;
   let defaultPropKey = `default${propName}`;
   return computed(currentPropKey, defaultPropKey, function() {
     let current = this.get(currentPropKey);
@@ -74,9 +75,11 @@ function getDefaultProp(propName) {
   return getConfigItem(`defaults.${propName}`) || null;
 };
 
+const PROPS = getConfigItem('props');
+
 const serviceCfg = {
   _metaTagDescriptions: getConfigItem('metaTagDescriptions'),
-  _resolvedMetaTags: computed('_metaTagDescriptions.[]', function() {
+  _resolvedMetaTags: computed('_metaTagDescriptions.[]', `current.${PROPS.join(',')}` , function() {
     return this.get('_metaTagDescriptions').map((desc) => {
       let o = {};
       o[desc.namePropertyKey] = desc.namePropertyValue;
@@ -96,7 +99,6 @@ const serviceCfg = {
   })
 };
 
-const PROPS = getConfigItem('props');
 
 for (let i in PROPS) {
   let p = PROPS[i];
