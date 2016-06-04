@@ -4,7 +4,7 @@ import config from '../config/environment';
 const { computed, Service, inject } = Ember;
 
 const DEFAULT_CONFIG = {
-  props: ['description', 'title', 'image', 'url', 'twitterHandle', 'siteName'],
+  props: ['description', 'title', 'image', 'url', 'twitterHandle'],
   metaTagDescriptions: [
     { namePropertyKey: 'name',
       namePropertyValue: 'twitter:card',
@@ -30,10 +30,6 @@ const DEFAULT_CONFIG = {
       namePropertyValue: 'og:description',
       valuePropertyKey: 'content',
       valueProperty: 'description' },
-    { namePropertyKey: 'property',
-      namePropertyValue: 'og:site_name',
-      valuePropertyKey: 'content',
-      valueProperty: 'siteName' },
     { namePropertyKey: 'property',
       namePropertyValue: 'og:image',
       valuePropertyKey: 'content',
