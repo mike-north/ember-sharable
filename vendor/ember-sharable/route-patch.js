@@ -28,8 +28,8 @@
 
   routeProps[mergedActionPropertyName] = {
     updateSharableMetadata: function() {
-      let meta = this.get('sharableMeta');
-      for (let m in meta) {
+      var meta = this.get('sharableMeta');
+      for (var m in meta) {
         this.set(`sharable.current.${m}`, meta[m]);
         // this.get('sharable').notifyPropertyChange(`current.${m}`);
       }
