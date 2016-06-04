@@ -13,7 +13,7 @@ const DEFAULT_CONFIG = {
     { namePropertyKey: 'property',
       namePropertyValue: 'og:type',
       valuePropertyKey: 'content',
-      value: 'article' },
+      valuePropertyKey: 'ogType' },
     { namePropertyKey: 'name',
       namePropertyValue: 'twitter:site',
       valuePropertyKey: 'content',
@@ -50,7 +50,10 @@ const DEFAULT_CONFIG = {
       namePropertyValue: 'twitter:image',
       valuePropertyKey: 'content',
       valueProperty: 'image' }
-  ]
+  ],
+  defaults: {
+    ogType: 'website'
+  }
 };
 
 function getProp(propName) {
