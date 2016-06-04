@@ -4,9 +4,10 @@ This README outlines the details of collaborating on this Ember addon.
 
 ## About
 
+<img src="http://i66.tinypic.com/6z4m74.png" alt="Twitter Card Example" align="right" width=400/>
+
 When links are shared in facebook, twitter, slack, and many other sites, meta tags are used in order to provide a rich representation of the linked content. Read more about this here
 
-![Twitter Card Example](http://i66.tinypic.com/6z4m74.png)
 
 * [Twitter Cards Documentation](https://dev.twitter.com/cards/overview)
 * [Facebook Opengraph Object Properties Documentation](https://developers.facebook.com/docs/sharing/opengraph/object-properties)
