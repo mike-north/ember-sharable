@@ -1,7 +1,7 @@
 {
   "name": "ember-sharable",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Rich social sharing metadata for Ember.js apps",
   "directories": {
     "doc": "doc",
     "test": "tests"
