@@ -12,7 +12,15 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       }
     },
-
+    sharable: {
+      defaults: {
+        title: 'Ember-Sharable',
+        description: 'Rich metadata for sharing pages on Ember.js apps',
+        url: 'https://github.com/levanto-financial/ember-sharable',
+        image: 'https://avatars2.githubusercontent.com/u/12159343?v=3&s=200',
+        twitterHandle: '@Levanto'
+      }
+    },
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
