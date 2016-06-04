@@ -92,7 +92,7 @@ var ENV = {
     { namePropertyKey: 'name',
       namePropertyValue: 'mascot',
       valuePropertyKey: 'content',
-      valuePropertyKey: 'mascotName' }
+      valueProperty: 'mascotName' }
     ]),
     defaults: {
       mascotName: 'tomster'
