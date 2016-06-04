@@ -1,35 +1,34 @@
----
 language: node_js
 node_js:
-  - "0.12"
-
+- '0.12'
 sudo: false
-
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 env:
-  - EMBER_TRY_SCENARIO=default
-  - EMBER_TRY_SCENARIO=ember-1.13
-  - EMBER_TRY_SCENARIO=ember-release
-  - EMBER_TRY_SCENARIO=ember-beta
-  - EMBER_TRY_SCENARIO=ember-canary
-
+- EMBER_TRY_SCENARIO=default
+- EMBER_TRY_SCENARIO=ember-1.13
+- EMBER_TRY_SCENARIO=ember-release
+- EMBER_TRY_SCENARIO=ember-beta
+- EMBER_TRY_SCENARIO=ember-canary
 matrix:
   fast_finish: true
   allow_failures:
-    - env: EMBER_TRY_SCENARIO=ember-canary
-
+  - env: EMBER_TRY_SCENARIO=ember-canary
 before_install:
-  - export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
-  - "npm config set spin false"
-  - "npm install -g npm@^2"
-
+- export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
+- npm config set spin false
+- npm install -g npm@^2
 install:
-  - npm install -g bower
-  - npm install
-  - bower install
-
+- npm install -g bower
+- npm install
+- bower install
 script:
-  - ember try $EMBER_TRY_SCENARIO test
+- ember try $EMBER_TRY_SCENARIO test
+deploy:
+  provider: heroku
+  api_key:
+    secure: NEznWvmgjfsqnnIBIruns49Oo5wcKS+rfa6RObePz0W5aOAhVvCCjhHeZcjtrVjhNCCX19NLTF/3L2510wFqZRQ6cNA5ozjdtsFVJ2HFiOtQH4yT1335Hl/gBEf0LTMjmS4Ew2l8hc1Xpbp+EKZXQ8s4DJsbb22RjG+vCV4jKvk+Vb8j3xTWLApwhTwKDcp98MmreZKmhYcA94PsbfAS2ZGzLRJAM4u+fYdgutuBip1lzpAQ0iplIXRD4BZuNwBVsHDc9hA1Vlf+3bOhPvEfFFr1M+OQOlS0q5MaDTGe4DCEt1z9FuaDtz469iaDRJHQCDDUtUDiZaabhzMn7uBLNEmuVCQXJDFPVkrZZ9KmhSnxH0i2w/aL7o85XJUe1V9qZQLyxu626R4OAI5upIznF4J/2FP1PIOztYfHUWT1t04eBWETX+NPGOr06vLiD7dq4JhZscXvZpLqg2BCTG4lWsZbUQ/TQSGyT+dzXRgS2r72gJX49eJWVYfASnIKzlYm8kJpNyFYliVtA+LCACO6oLBSXMyA2joJb7iMjVhoFvNImLtKP2kfQXS2IqHb1IHsmo5JEo1dMn4FFyGm0qwvOheXelEb93w3SZ/93p/Wu6UXSV6yGce5+47KahD4WIjSQhxDHPcAw2OxhIgdtBJ07XaRYCop5suZXOdabnPEYgU=
+  app: ember-sharable-demo
+  on:
+    repo: levanto-financial/ember-sharable
