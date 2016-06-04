@@ -15,6 +15,7 @@ module.exports = function(environment) {
     sharable: {
       defaults: {
         title: 'Ember-Sharable',
+        siteName: 'Github',
         description: 'Rich metadata for sharing pages on Ember.js apps',
         url: 'https://github.com/levanto-financial/ember-sharable',
         image: 'https://avatars2.githubusercontent.com/u/12159343?v=3&s=200',
