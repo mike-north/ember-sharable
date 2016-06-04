@@ -59,8 +59,7 @@ const serviceCfg = {
   })
 };
 
-
-for (let i in PROPS) {
+for (let i = 0; i < PROPS.length; i++) {
   let p = PROPS[i];
   serviceCfg[`default${p}`] = getDefaultProp(p);
   serviceCfg[`_resolved${p}`] = getProp(p);
