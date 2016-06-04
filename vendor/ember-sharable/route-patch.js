@@ -1,3 +1,5 @@
+/*globals Ember*/
+
 (function() {
 
   var routeProps = {
@@ -30,8 +32,7 @@
     updateSharableMetadata: function() {
       var meta = this.get('sharableMeta');
       for (var m in meta) {
-        this.set(`sharable.current.${m}`, meta[m]);
-        // this.get('sharable').notifyPropertyChange(`current.${m}`);
+        this.set('sharable.current.' + m, meta[m]);
       }
     }
   };

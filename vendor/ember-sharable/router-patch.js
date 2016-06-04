@@ -1,10 +1,11 @@
-(function() {
-  /*globals Ember*/
+/*globals Ember*/
 
+(function() {
+  'use strict';
   // jscs:disable requireObjectDestructuring
   var getOwner = Ember.getOwner;
   // jscs:enable requireObjectDestructuring
-  var { inject } = Ember;
+  var inject = Ember.inject;
 
   function _addPropertyMetaTagsToHead(dom, tags) {
     for (var i in tags) {
@@ -29,7 +30,7 @@
   function _addPropertyMetaTagToHead(dom, tag) {
     var m = dom.createElement('meta');
     m.setAttribute('ember-sharable', 'true');
-    for (let p in tag) {
+    for (var p in tag) {
       m.setAttribute(p, tag[p]);
     }
     dom.head.appendChild(m);
