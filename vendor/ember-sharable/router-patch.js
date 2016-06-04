@@ -8,7 +8,7 @@
   var inject = Ember.inject;
 
   function _addPropertyMetaTagsToHead(dom, tags) {
-    for (var i in tags) {
+    for (var i = 0; i < tags.length; i++) {
       _addPropertyMetaTagToHead(dom, tags[i]);
     }
   }
