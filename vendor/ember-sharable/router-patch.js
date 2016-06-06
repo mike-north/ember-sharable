@@ -9,7 +9,12 @@
 
   function _addPropertyMetaTagsToHead(dom, tags) {
     for (var i = 0; i < tags.length; i++) {
-      _addPropertyMetaTagToHead(dom, tags[i]);
+      _addPropertyTagToHead(dom, tags[i], 'meta');
+    }
+  }
+  function _addPropertyLinkTagsToHead(dom, tags) {
+    for (var i = 0; i < tags.length; i++) {
+      _addPropertyTagToHead(dom, tags[i], 'link');
     }
   }
 
@@ -18,7 +23,7 @@
     var toRemove = [];
     for (var i = 0; i < headChildren.length; i++) {
       var node = headChildren.item(i);
-      if (node.nodeType === 1 && node.tagName === 'META' && node.getAttribute('ember-sharable') === 'true') {
+      if (node.nodeType === 1 && (['META', 'LINK'].indexOf(node.tagName) >= 0) && node.getAttribute('ember-sharable') === 'true') {
         toRemove.push(node);
       }
     }
@@ -27,8 +32,8 @@
     }
   }
 
-  function _addPropertyMetaTagToHead(dom, tag) {
-    var m = dom.createElement('meta');
+  function _addPropertyTagToHead(dom, tag, tagName) {
+    var m = dom.createElement(tagName);
     m.setAttribute('ember-sharable', 'true');
     for (var p in tag) {
       m.setAttribute(p, tag[p]);
@@ -49,6 +54,7 @@
         _clearEmberSharableMetaTags(dom);
       }
       _addPropertyMetaTagsToHead(dom, this.get('sharable._resolvedMetaTags'));
+      _addPropertyLinkTagsToHead(dom, this.get('sharable._resolvedLinkTags'));
     })
   });
 
