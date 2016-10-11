@@ -1,38 +1,36 @@
----
 language: node_js
 node_js:
-  - "4"
-
+- '4'
 sudo: false
-
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 env:
-  - EMBER_TRY_SCENARIO=default
-  - EMBER_TRY_SCENARIO=ember-1.13
-  - EMBER_TRY_SCENARIO=ember-release
-  - EMBER_TRY_SCENARIO=ember-beta
-  - EMBER_TRY_SCENARIO=ember-canary
-
+- EMBER_TRY_SCENARIO=default
+- EMBER_TRY_SCENARIO=ember-1.13
+- EMBER_TRY_SCENARIO=ember-release
+- EMBER_TRY_SCENARIO=ember-beta
+- EMBER_TRY_SCENARIO=ember-canary
 matrix:
   fast_finish: true
   allow_failures:
-    - env: EMBER_TRY_SCENARIO=ember-canary
-
+  - env: EMBER_TRY_SCENARIO=ember-canary
 before_install:
-  - npm config set spin false
-  - npm install -g bower
-  - bower --version
-  - npm install phantomjs-prebuilt
-  - node_modules/phantomjs-prebuilt/bin/phantomjs --version
-
+- npm config set spin false
+- npm install -g bower
+- bower --version
+- npm install phantomjs-prebuilt
+- node_modules/phantomjs-prebuilt/bin/phantomjs --version
 install:
-  - npm install
-  - bower install
-
+- npm install
+- bower install
 script:
-  # Usually, it's ok to finish the test scenario without reverting
-  #  to the addon's original dependency state, skipping "cleanup".
-  - ember try:one $EMBER_TRY_SCENARIO test --skip-cleanup
+- ember try:one $EMBER_TRY_SCENARIO test --skip-cleanup
+deploy:
+  provider: heroku
+  api_key:
+    secure: d2ezVQeNXX8twSvM30UBGPhYjuIKxWj0IrBdXkMCnnczfUcbTN9slctLSeb8CEBrVDrXoF8cnX05loPo9Fbi3kE5TVj/C9dANActBfKzPv1cV/n8lnoptl9JM3d7ELAcYxwwY5nBtFunXkUjZw3r4SEoKkkWRO87QzkGeJOzAeNrEsEBkqA46gfou3wJPt25PjgXLQ6qCxHOP0jkEzgzqOuAyWGmkFTCTpWK0iwnOW/yqb2z5PsU83igBvf9A6C4mm2RXdJdJ2HT6VqV07wTEn7NxSBvIrV4b/F+H+Cmt5lwgbVScnN6lu0C0UHu2VqwTWXq/TkLfzi4NrF4ZMAIrEDXmw8WtH5dR98Nbo5dToHI5HFxiViDxjmQXIY7r7fQCRjTuPOf6Mcfs4wmcGKCM7S0FSTk0PrH2Pv+EU/ZCUE/JxxXWFQSJ+tfhpDcJVHiKlFvMlUwT+U665sNGlGIfjtNmL0HSOUDkZ21zXhTvH5ffIkVjyJExo6X39zMTYRvj7gdZ5v+00S8oD9bVYY28HCOPzLzRZGyk9PRpqAjQauwXkCyJIPG730selbtHBs4amxL18kT8mfg68OOjUJRZMZLxt7ppxN8gjullPxtMzetHKLV4uTZU1xXwh9W2oitq8w92gH7UvXdth1Czv89yJLcEFqxsZTj754SlZqvOJc=
+  app: ember-sharable-demo
+  on:
+    repo: mike-north/ember-sharable
+    branch: master
