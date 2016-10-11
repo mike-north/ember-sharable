@@ -15,7 +15,7 @@ test('visiting /home', function(assert) {
     assert.equal(document.querySelectorAll('meta[property="og:url"]')[0].content, 'https://ember-sharable-demo.herokuapp.com/', 'Correct og:url content');
     assert.equal(document.querySelectorAll('meta[property="og:description"]')[0].content, 'Rich metadata for sharing pages on Ember.js apps', 'Correct og:description content');
     assert.equal(document.querySelectorAll('meta[property="og:title"]')[0].content, 'Another thing', 'Correct og:title content');
-    assert.equal(document.querySelectorAll('link[rel="image_src"]')[0].href, 'https://avatars2.githubusercontent.com/u/12159343?v=3&s=200', 'Correct reddit image content');
+    assert.equal(document.querySelectorAll('link[rel="image_src"]')[0].href, 'https://avatars0.githubusercontent.com/u/558005?v=3&s=466', 'Correct reddit image content');
   });
 
   visit('/home');

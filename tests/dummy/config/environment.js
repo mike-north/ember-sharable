@@ -4,7 +4,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'dummy',
     environment: environment,
-    baseURL: '/',
+    rootURL: '/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
@@ -17,8 +17,8 @@ module.exports = function(environment) {
         title: 'Ember-Sharable',
         description: 'Rich metadata for sharing pages on Ember.js apps',
         url: 'https://ember-sharable-demo.herokuapp.com/',
-        image: 'https://avatars2.githubusercontent.com/u/12159343?v=3&s=200',
-        twitterHandle: '@Levanto'
+        image: 'https://avatars0.githubusercontent.com/u/558005?v=3&s=466',
+        twitterHandle: '@MichaelLNorth'
       }
     },
     APP: {
@@ -37,7 +37,6 @@ module.exports = function(environment) {
 
   if (environment === 'test') {
     // Testem prefers this...
-    ENV.baseURL = '/';
     ENV.locationType = 'none';
 
     // keep test console output quieter

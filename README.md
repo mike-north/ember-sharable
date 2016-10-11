@@ -1,4 +1,4 @@
-# Ember-sharable [![Build Status](https://travis-ci.org/levanto-financial/ember-sharable.svg?branch=master)](https://travis-ci.org/levanto-financial/ember-sharable)
+# Ember-sharable [![Build Status](https://travis-ci.org/mike-north/ember-sharable.svg?branch=master)](https://travis-ci.org/mike-north/ember-sharable)
 
 This README outlines the details of collaborating on this Ember addon.
 
