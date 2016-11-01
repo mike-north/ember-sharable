@@ -13,7 +13,7 @@
   },
   "repository": "https://github.com/levanto-financial/ember-sharable.git",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4"
   },
   "author": "Mike North <michael.l.north@gmail.com> (https://mike.north)",
   "license": "MIT",
