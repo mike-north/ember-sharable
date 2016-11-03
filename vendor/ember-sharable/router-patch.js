@@ -49,12 +49,23 @@
       // this.get('sharable').notifyPropertyChange('_resolvedMetaTags');
       var container = getOwner ? getOwner(this) : this.container;
       var renderer = container.lookup('renderer:-dom');
-      var dom = Ember.get(renderer, '_dom.document');
-      if (dom.head.childNodes.length > 1) { // dirty hack to save some work in Fasboot case
-        _clearEmberSharableMetaTags(dom);
+      var domForAppWithGlimmer2 = container.lookup('service:-document');
+
+      if (renderer && renderer._dom) {
+        var dom = Ember.get(renderer, '_dom.document');
+        if (dom.head.childNodes.length > 1) { // dirty hack to save some work in Fasboot case
+          _clearEmberSharableMetaTags(dom);
+        }
+        _addPropertyMetaTagsToHead(dom, this.get('sharable._resolvedMetaTags'));
+        _addPropertyLinkTagsToHead(dom, this.get('sharable._resolvedLinkTags'));
+      } else if (domForAppWithGlimmer2) {
+        var dom = domForAppWithGlimmer2;
+        if (dom.head.childNodes.length > 1) { // dirty hack to save some work in Fasboot case
+          _clearEmberSharableMetaTags(dom);
+        }
+        _addPropertyMetaTagsToHead(dom, this.get('sharable._resolvedMetaTags'));
+        _addPropertyLinkTagsToHead(dom, this.get('sharable._resolvedLinkTags'));
       }
-      _addPropertyMetaTagsToHead(dom, this.get('sharable._resolvedMetaTags'));
-      _addPropertyLinkTagsToHead(dom, this.get('sharable._resolvedLinkTags'));
     })
   });
 
