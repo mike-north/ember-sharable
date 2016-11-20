@@ -3,8 +3,12 @@
 
 module.exports = {
   name: 'ember-sharable',
+  isDevelopingAddon: function() {
+    return true;
+  },
   included: function() {
-    this.app.import('vendor/ember-sharable/router-patch.js');
-    this.app.import('vendor/ember-sharable/route-patch.js');
+    console.log(arguments);
+    this.import('vendor/ember-sharable/router-patch.js');
+    this.import('vendor/ember-sharable/route-patch.js');
   }
 };
