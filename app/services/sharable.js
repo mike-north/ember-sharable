@@ -1,9 +1,8 @@
-import Ember from 'ember';
+import { computed, get } from '@ember/object';
+import Service from '@ember/service';
 import config from '../config/environment';
 import defaultMetaTags from 'ember-sharable/utils/default-meta-tags';
 import defaultLinkTags from 'ember-sharable/utils/default-link-tags';
-
-const { computed, Service, inject } = Ember;
 
 const DEFAULT_CONFIG = {
   props: ['description', 'title', 'image', 'url', 'twitterHandle'],
@@ -30,12 +29,12 @@ function getProp(propName) {
 
 function getConfigItem(key) {
   let cfg = config;
-  return Ember.get(cfg, `sharable.${key}`) || Ember.get(DEFAULT_CONFIG, key);
-};
+  return get(cfg, `sharable.${key}`) || get(DEFAULT_CONFIG, key);
+}
 
 function getDefaultProp(propName) {
   return getConfigItem(`defaults.${propName}`) || null;
-};
+}
 
 const PROPS = getConfigItem('props');
 

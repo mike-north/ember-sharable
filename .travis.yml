@@ -1,41 +1,52 @@
+---
 language: node_js
 node_js:
-- '0.12'
+  - "4"
+
 sudo: false
+dist: trusty
+
+addons:
+  chrome: stable
+
 cache:
   directories:
-  - node_modules
+    - $HOME/.npm
+
 env:
-- EMBER_TRY_SCENARIO=default
-- EMBER_TRY_SCENARIO=ember-1.13
-- EMBER_TRY_SCENARIO=ember-release
-- EMBER_TRY_SCENARIO=ember-beta
-- EMBER_TRY_SCENARIO=ember-canary
+  global:
+    # See https://git.io/vdao3 for details.
+    - JOBS=1
+  matrix:
+    # we recommend new addons test the current and previous LTS
+    # as well as latest stable release (bonus points to beta/canary)
+    - EMBER_TRY_SCENARIO=ember-1.13
+    - EMBER_TRY_SCENARIO=ember-lts-2.12
+    - EMBER_TRY_SCENARIO=ember-lts-2.16
+    - EMBER_TRY_SCENARIO=ember-release
+    - EMBER_TRY_SCENARIO=ember-beta
+    - EMBER_TRY_SCENARIO=ember-canary
+
 matrix:
   fast_finish: true
   allow_failures:
-  - env: EMBER_TRY_SCENARIO=ember-canary
+    - env: EMBER_TRY_SCENARIO=ember-canary
+
 before_install:
-- mkdir travis-phantomjs
-- wget https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2
-  -O $PWD/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2
-- tar -xvf $PWD/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2 -C $PWD/travis-phantomjs
-- export PATH=$PWD/travis-phantomjs:$PATH
-- npm config set spin false
-- npm install -g npm@^2
-install:
-- npm install -g bower
-- npm install
-- bower install
+  - npm config set spin false
+  - npm install -g npm@4
+  - npm --version
+
 script:
-- ember try $EMBER_TRY_SCENARIO test --skip-cleanup
+  - npm run lint:js
+  # Usually, it's ok to finish the test scenario without reverting
+  #  to the addon's original dependency state, skipping "cleanup".
+  - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO --skip-cleanup
+
 deploy:
   provider: heroku
   api_key:
     secure: NEznWvmgjfsqnnIBIruns49Oo5wcKS+rfa6RObePz0W5aOAhVvCCjhHeZcjtrVjhNCCX19NLTF/3L2510wFqZRQ6cNA5ozjdtsFVJ2HFiOtQH4yT1335Hl/gBEf0LTMjmS4Ew2l8hc1Xpbp+EKZXQ8s4DJsbb22RjG+vCV4jKvk+Vb8j3xTWLApwhTwKDcp98MmreZKmhYcA94PsbfAS2ZGzLRJAM4u+fYdgutuBip1lzpAQ0iplIXRD4BZuNwBVsHDc9hA1Vlf+3bOhPvEfFFr1M+OQOlS0q5MaDTGe4DCEt1z9FuaDtz469iaDRJHQCDDUtUDiZaabhzMn7uBLNEmuVCQXJDFPVkrZZ9KmhSnxH0i2w/aL7o85XJUe1V9qZQLyxu626R4OAI5upIznF4J/2FP1PIOztYfHUWT1t04eBWETX+NPGOr06vLiD7dq4JhZscXvZpLqg2BCTG4lWsZbUQ/TQSGyT+dzXRgS2r72gJX49eJWVYfASnIKzlYm8kJpNyFYliVtA+LCACO6oLBSXMyA2joJb7iMjVhoFvNImLtKP2kfQXS2IqHb1IHsmo5JEo1dMn4FFyGm0qwvOheXelEb93w3SZ/93p/Wu6UXSV6yGce5+47KahD4WIjSQhxDHPcAw2OxhIgdtBJ07XaRYCop5suZXOdabnPEYgU=
   app: ember-sharable-demo
   on:
-    repo: levanto-financial/ember-sharable
-notifications:
-  slack:
-    secure: IvBUm/w0IzXOoGj7fcVeP+tLLG8TLecowPEkQaFOGd5zWkUl6sArvq4eiM08VfVxwxCJnrrRfj5DRqrx9pXAb9pnj2625OsIpaDh64DYiArepM/Tl+v+PsRiL36kBWDtRJgxW7sUBzJkxTPzy1Ey3Jnk5ng9yDAWITksX1GAjCnXda8omBCT1b2fMCNxZkfhs/qeo+JaZ8qQI62t5kTte2150AFooaMScQ//YNDEdUFok0xkTfnkYY8ruXfhYgDIYCtJ0wMprIsQmu5a8mIrKl+hGLKGOJqSEknhp0NdzuwiCkszs+wDFEee5lgCnKigC9Km2wYcvDoD6Sq1F8oQbiQR8PXq2hXd5tCM0BHeeKYoB+BGPrr0LqqFcTN+JUvhEZykpHTON0NdQa8sfK7m3OckTAtE5wPYY8lYE0nD/zWWA+6nTKwPnFFhNO4uXY30PecTZyqeYFnR3z0TdWoIbvAW5i3Z+kzTfoTpB+UBbbmNQCk3tCStCHR6cd9THbRU2SA8aR8BtmDuUoBx6+AqPmV4dr5eOrRfTAYxrQtPnqZtuakXpnh7z3uvW7lkAE7xPsNOH6A8UoeQ3G5i68VaBbWJKEFHVGwNOyjHeAXwOfQspJH2eGThmW0x0wliaOstp7JIbt7t8AkqT96KDxKC4WPTZmaLlrDRoAI78eMzCPs=
+    repo: mike-north/ember-sharable
