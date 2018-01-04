@@ -1,8 +1,10 @@
 const list = [
-  { namePropertyKey: 'rel',
+  {
+    namePropertyKey: 'rel',
     namePropertyValue: 'image_src',
     valuePropertyKey: 'href',
-    valueProperty: 'image' }
+    valueProperty: 'image'
+  }
 ];
 
 export default list;

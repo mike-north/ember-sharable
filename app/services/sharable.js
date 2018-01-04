@@ -41,41 +41,45 @@ const PROPS = getConfigItem('props');
 const serviceCfg = {
   _metaTagDescriptions: getConfigItem('metaTagDescriptions'),
   _linkTagDescriptions: getConfigItem('linkTagDescriptions'),
-  _resolvedMetaTags: computed('_metaTagDescriptions.[]', `current.${PROPS.join(',')}` , function() {
-    return this.get('_metaTagDescriptions').map((desc) => {
-      let o = {};
-      o[desc.namePropertyKey] = desc.namePropertyValue;
-      let v = typeof desc.value === 'undefined' ? this.get(`_resolved${desc.valueProperty}`) : desc.value;
-      if (typeof v === 'undefined' || v === null) {
-        return null;
-      } else {
-        o[desc.valuePropertyKey] = v;
-        return o;
-      }
-    }).reduce((r, x) => {
-      if (x) {
-        r.push(x);
-      }
-      return r;
-    }, []);
+  _resolvedMetaTags: computed('_metaTagDescriptions.[]', `current.${PROPS.join(',')}`, function() {
+    return this.get('_metaTagDescriptions')
+      .map(desc => {
+        let o = {};
+        o[desc.namePropertyKey] = desc.namePropertyValue;
+        let v = typeof desc.value === 'undefined' ? this.get(`_resolved${desc.valueProperty}`) : desc.value;
+        if (typeof v === 'undefined' || v === null) {
+          return null;
+        } else {
+          o[desc.valuePropertyKey] = v;
+          return o;
+        }
+      })
+      .reduce((r, x) => {
+        if (x) {
+          r.push(x);
+        }
+        return r;
+      }, []);
   }),
-  _resolvedLinkTags: computed('_linkTagDescriptions.[]', `current.${PROPS.join(',')}` , function() {
-    return this.get('_linkTagDescriptions').map((desc) => {
-      let o = {};
-      o[desc.namePropertyKey] = desc.namePropertyValue;
-      let v = typeof desc.value === 'undefined' ? this.get(`_resolved${desc.valueProperty}`) : desc.value;
-      if (typeof v === 'undefined' || v === null) {
-        return null;
-      } else {
-        o[desc.valuePropertyKey] = v;
-        return o;
-      }
-    }).reduce((r, x) => {
-      if (x) {
-        r.push(x);
-      }
-      return r;
-    }, []);
+  _resolvedLinkTags: computed('_linkTagDescriptions.[]', `current.${PROPS.join(',')}`, function() {
+    return this.get('_linkTagDescriptions')
+      .map(desc => {
+        let o = {};
+        o[desc.namePropertyKey] = desc.namePropertyValue;
+        let v = typeof desc.value === 'undefined' ? this.get(`_resolved${desc.valueProperty}`) : desc.value;
+        if (typeof v === 'undefined' || v === null) {
+          return null;
+        } else {
+          o[desc.valuePropertyKey] = v;
+          return o;
+        }
+      })
+      .reduce((r, x) => {
+        if (x) {
+          r.push(x);
+        }
+        return r;
+      }, []);
   })
 };
 
