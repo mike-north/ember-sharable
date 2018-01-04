@@ -1,5 +1,7 @@
 # Ember-sharable [![Build Status](https://travis-ci.org/levanto-financial/ember-sharable.svg?branch=master)](https://travis-ci.org/levanto-financial/ember-sharable)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mike-north/ember-sharable.svg)](https://greenkeeper.io/)
+
 This README outlines the details of collaborating on this Ember addon.
 
 ## About

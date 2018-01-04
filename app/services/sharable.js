@@ -1,9 +1,8 @@
-import Ember from 'ember';
+import { computed, get } from '@ember/object';
+import Service from '@ember/service';
 import config from '../config/environment';
 import defaultMetaTags from 'ember-sharable/utils/default-meta-tags';
 import defaultLinkTags from 'ember-sharable/utils/default-link-tags';
-
-const { computed, Service, inject } = Ember;
 
 const DEFAULT_CONFIG = {
   props: ['description', 'title', 'image', 'url', 'twitterHandle'],
@@ -30,53 +29,57 @@ function getProp(propName) {
 
 function getConfigItem(key) {
   let cfg = config;
-  return Ember.get(cfg, `sharable.${key}`) || Ember.get(DEFAULT_CONFIG, key);
-};
+  return get(cfg, `sharable.${key}`) || get(DEFAULT_CONFIG, key);
+}
 
 function getDefaultProp(propName) {
   return getConfigItem(`defaults.${propName}`) || null;
-};
+}
 
 const PROPS = getConfigItem('props');
 
 const serviceCfg = {
   _metaTagDescriptions: getConfigItem('metaTagDescriptions'),
   _linkTagDescriptions: getConfigItem('linkTagDescriptions'),
-  _resolvedMetaTags: computed('_metaTagDescriptions.[]', `current.${PROPS.join(',')}` , function() {
-    return this.get('_metaTagDescriptions').map((desc) => {
-      let o = {};
-      o[desc.namePropertyKey] = desc.namePropertyValue;
-      let v = typeof desc.value === 'undefined' ? this.get(`_resolved${desc.valueProperty}`) : desc.value;
-      if (typeof v === 'undefined' || v === null) {
-        return null;
-      } else {
-        o[desc.valuePropertyKey] = v;
-        return o;
-      }
-    }).reduce((r, x) => {
-      if (x) {
-        r.push(x);
-      }
-      return r;
-    }, []);
+  _resolvedMetaTags: computed('_metaTagDescriptions.[]', `current.${PROPS.join(',')}`, function() {
+    return this.get('_metaTagDescriptions')
+      .map(desc => {
+        let o = {};
+        o[desc.namePropertyKey] = desc.namePropertyValue;
+        let v = typeof desc.value === 'undefined' ? this.get(`_resolved${desc.valueProperty}`) : desc.value;
+        if (typeof v === 'undefined' || v === null) {
+          return null;
+        } else {
+          o[desc.valuePropertyKey] = v;
+          return o;
+        }
+      })
+      .reduce((r, x) => {
+        if (x) {
+          r.push(x);
+        }
+        return r;
+      }, []);
   }),
-  _resolvedLinkTags: computed('_linkTagDescriptions.[]', `current.${PROPS.join(',')}` , function() {
-    return this.get('_linkTagDescriptions').map((desc) => {
-      let o = {};
-      o[desc.namePropertyKey] = desc.namePropertyValue;
-      let v = typeof desc.value === 'undefined' ? this.get(`_resolved${desc.valueProperty}`) : desc.value;
-      if (typeof v === 'undefined' || v === null) {
-        return null;
-      } else {
-        o[desc.valuePropertyKey] = v;
-        return o;
-      }
-    }).reduce((r, x) => {
-      if (x) {
-        r.push(x);
-      }
-      return r;
-    }, []);
+  _resolvedLinkTags: computed('_linkTagDescriptions.[]', `current.${PROPS.join(',')}`, function() {
+    return this.get('_linkTagDescriptions')
+      .map(desc => {
+        let o = {};
+        o[desc.namePropertyKey] = desc.namePropertyValue;
+        let v = typeof desc.value === 'undefined' ? this.get(`_resolved${desc.valueProperty}`) : desc.value;
+        if (typeof v === 'undefined' || v === null) {
+          return null;
+        } else {
+          o[desc.valuePropertyKey] = v;
+          return o;
+        }
+      })
+      .reduce((r, x) => {
+        if (x) {
+          r.push(x);
+        }
+        return r;
+      }, []);
   })
 };
 
