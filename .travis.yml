@@ -1,52 +1,39 @@
----
 language: node_js
 node_js:
-  - "4"
-
+- '4'
 sudo: false
 dist: trusty
-
 addons:
   chrome: stable
-
 cache:
   directories:
-    - $HOME/.npm
-
+  - "$HOME/.npm"
 env:
   global:
-    # See https://git.io/vdao3 for details.
-    - JOBS=1
+  - JOBS=1
   matrix:
-    # we recommend new addons test the current and previous LTS
-    # as well as latest stable release (bonus points to beta/canary)
-    - EMBER_TRY_SCENARIO=ember-1.13
-    - EMBER_TRY_SCENARIO=ember-lts-2.12
-    - EMBER_TRY_SCENARIO=ember-lts-2.16
-    - EMBER_TRY_SCENARIO=ember-release
-    - EMBER_TRY_SCENARIO=ember-beta
-    - EMBER_TRY_SCENARIO=ember-canary
-
+  - EMBER_TRY_SCENARIO=ember-1.13
+  - EMBER_TRY_SCENARIO=ember-lts-2.12
+  - EMBER_TRY_SCENARIO=ember-lts-2.16
+  - EMBER_TRY_SCENARIO=ember-release
+  - EMBER_TRY_SCENARIO=ember-beta
+  - EMBER_TRY_SCENARIO=ember-canary
 matrix:
   fast_finish: true
   allow_failures:
-    - env: EMBER_TRY_SCENARIO=ember-canary
-
+  - env: EMBER_TRY_SCENARIO=ember-canary
 before_install:
-  - npm config set spin false
-  - npm install -g npm@4
-  - npm --version
-
+- npm config set spin false
+- npm install -g npm@4
+- npm --version
 script:
-  - npm run lint:js
-  # Usually, it's ok to finish the test scenario without reverting
-  #  to the addon's original dependency state, skipping "cleanup".
-  - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO --skip-cleanup
-
+- npm run lint:js
+- node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO --skip-cleanup
 deploy:
   provider: heroku
   api_key:
-    secure: NEznWvmgjfsqnnIBIruns49Oo5wcKS+rfa6RObePz0W5aOAhVvCCjhHeZcjtrVjhNCCX19NLTF/3L2510wFqZRQ6cNA5ozjdtsFVJ2HFiOtQH4yT1335Hl/gBEf0LTMjmS4Ew2l8hc1Xpbp+EKZXQ8s4DJsbb22RjG+vCV4jKvk+Vb8j3xTWLApwhTwKDcp98MmreZKmhYcA94PsbfAS2ZGzLRJAM4u+fYdgutuBip1lzpAQ0iplIXRD4BZuNwBVsHDc9hA1Vlf+3bOhPvEfFFr1M+OQOlS0q5MaDTGe4DCEt1z9FuaDtz469iaDRJHQCDDUtUDiZaabhzMn7uBLNEmuVCQXJDFPVkrZZ9KmhSnxH0i2w/aL7o85XJUe1V9qZQLyxu626R4OAI5upIznF4J/2FP1PIOztYfHUWT1t04eBWETX+NPGOr06vLiD7dq4JhZscXvZpLqg2BCTG4lWsZbUQ/TQSGyT+dzXRgS2r72gJX49eJWVYfASnIKzlYm8kJpNyFYliVtA+LCACO6oLBSXMyA2joJb7iMjVhoFvNImLtKP2kfQXS2IqHb1IHsmo5JEo1dMn4FFyGm0qwvOheXelEb93w3SZ/93p/Wu6UXSV6yGce5+47KahD4WIjSQhxDHPcAw2OxhIgdtBJ07XaRYCop5suZXOdabnPEYgU=
+    secure: cc2Nz1gtNLgkruRhEB9vsLaF6Ehr9xy6eyvMW90weIfLlcjR0yoecvysigYHCiILSc6Son2/EXn0Y8Sfdtlzg98zr78dQmYGQv7KnbB5ufRdzUURLbE8knZbm0g+cDU7UsOwqsz9NYMuFl+hiSZdtwTtTRha6Q+P8Ft2BsRlhJ5i2VriC+j1Nnjfmi97SFbEGBR2SUF5Tx9s6HXsxhZ60cxUplfdZJPcdchJZYlPYjr1xgiTs1yYllzOsmhJ8qWj54P8LCiXhPpo+brmYDQ2Solm9dY+O0rDuIfYjkngfz0vCeUxWb2Eeg/lmmtbxDgj0NW2CBUXDYrgIFyZ0nSY8F4/a7gdgCmKd8BxarzVm8acWQ8m1P5s/3aZYaJRWuKAKa3c+S6hwCJQD6EkKt/s3gnuI40zdqh+hGI+PhQNcJtrD2NJuHNL6Mz7+rPLxEzRfb+xXdZseXNO6vnoC0bVg8hWLuH1catndj5aliR7JagxiJV5CtVyxfzC19pHQQ6VpyZegVmMLBq2UZKqwQDCnhm6IsfJF2/Hu/htQla1FJmcrgZfGSXN1Wd7CHFlsduPXDigLJVg4saD114z6rPhwT5vdUna2Z7s2S4jb2zSvNCdBk23wsqKmerlLY8HaEKWpxsRiY5g8f0nP7DscqNyQcJIr76SuWxW30Tp5rlT7J8=
   app: ember-sharable-demo
   on:
     repo: mike-north/ember-sharable
+    branch: master
