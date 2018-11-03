@@ -12,6 +12,7 @@ before_script:
 cache:
   directories:
     - '$HOME/.npm'
+useYarn: true
 env:
   global:
     - JOBS=1
