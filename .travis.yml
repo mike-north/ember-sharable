@@ -1,34 +1,31 @@
 language: node_js
 node_js:
-- '4'
-sudo: false
+  - 'stable'
+sudo: required
 dist: trusty
 addons:
   chrome: stable
+before_script:
+  - 'sudo chown root /opt/google/chrome/chrome-sandbox'
+  - 'sudo chmod 4755 /opt/google/chrome/chrome-sandbox'
+
 cache:
   directories:
-  - "$HOME/.npm"
+    - '$HOME/.npm'
 env:
   global:
-  - JOBS=1
-  matrix:
-  - EMBER_TRY_SCENARIO=ember-1.13
-  - EMBER_TRY_SCENARIO=ember-lts-2.12
-  - EMBER_TRY_SCENARIO=ember-lts-2.16
-  - EMBER_TRY_SCENARIO=ember-release
-  - EMBER_TRY_SCENARIO=ember-beta
-  - EMBER_TRY_SCENARIO=ember-canary
+    - JOBS=1
 matrix:
   fast_finish: true
   allow_failures:
-  - env: EMBER_TRY_SCENARIO=ember-canary
+    - env: EMBER_TRY_SCENARIO=ember-canary
 before_install:
-- npm config set spin false
-- npm install -g npm@4
-- npm --version
+  - npm config set spin false
+  - npm install -g npm@4
+  - npm --version
 script:
-- npm run lint:js
-- node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO --skip-cleanup
+  - yarn lint:js
+  - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO --skip-cleanup
 deploy:
   provider: heroku
   api_key:
@@ -37,3 +34,17 @@ deploy:
   on:
     repo: mike-north/ember-sharable
     branch: master
+
+stages:
+  - basic test
+  - additional tests
+jobs:
+  fail_fast: true
+  include:
+    - stage: basic test
+      env: EMBER_TRY_SCENARIO=ember-release
+    - stage: additional tests
+      env: EMBER_TRY_SCENARIO=ember-lts-2.12
+    - env: EMBER_TRY_SCENARIO=ember-lts-2.16
+    - env: EMBER_TRY_SCENARIO=ember-beta
+    - env: EMBER_TRY_SCENARIO=ember-canary
