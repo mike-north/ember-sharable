@@ -26,14 +26,6 @@ before_install:
 script:
   - npm run lint:js
   - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO --skip-cleanup
-deploy:
-  provider: heroku
-  api_key:
-    secure: cc2Nz1gtNLgkruRhEB9vsLaF6Ehr9xy6eyvMW90weIfLlcjR0yoecvysigYHCiILSc6Son2/EXn0Y8Sfdtlzg98zr78dQmYGQv7KnbB5ufRdzUURLbE8knZbm0g+cDU7UsOwqsz9NYMuFl+hiSZdtwTtTRha6Q+P8Ft2BsRlhJ5i2VriC+j1Nnjfmi97SFbEGBR2SUF5Tx9s6HXsxhZ60cxUplfdZJPcdchJZYlPYjr1xgiTs1yYllzOsmhJ8qWj54P8LCiXhPpo+brmYDQ2Solm9dY+O0rDuIfYjkngfz0vCeUxWb2Eeg/lmmtbxDgj0NW2CBUXDYrgIFyZ0nSY8F4/a7gdgCmKd8BxarzVm8acWQ8m1P5s/3aZYaJRWuKAKa3c+S6hwCJQD6EkKt/s3gnuI40zdqh+hGI+PhQNcJtrD2NJuHNL6Mz7+rPLxEzRfb+xXdZseXNO6vnoC0bVg8hWLuH1catndj5aliR7JagxiJV5CtVyxfzC19pHQQ6VpyZegVmMLBq2UZKqwQDCnhm6IsfJF2/Hu/htQla1FJmcrgZfGSXN1Wd7CHFlsduPXDigLJVg4saD114z6rPhwT5vdUna2Z7s2S4jb2zSvNCdBk23wsqKmerlLY8HaEKWpxsRiY5g8f0nP7DscqNyQcJIr76SuWxW30Tp5rlT7J8=
-  app: ember-sharable-demo
-  on:
-    repo: mike-north/ember-sharable
-    branch: master
 
 stages:
   - basic test
