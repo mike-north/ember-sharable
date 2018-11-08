@@ -2,6 +2,7 @@
   "extends": [
     "config:js-lib"
   ],
+  "masterIssue": true,
   "automerge": true,
   "major": {
     "automerge": false
