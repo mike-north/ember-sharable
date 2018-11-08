@@ -2064,7 +2064,7 @@ broccoli-stew@^1.2.0, broccoli-stew@^1.5.0:
     symlink-or-copy "^1.2.0"
     walk-sync "^0.3.0"
 
-broccoli-uglify-sourcemap@^2.0.0:
+broccoli-uglify-sourcemap@^2.1.1:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/broccoli-uglify-sourcemap/-/broccoli-uglify-sourcemap-2.2.0.tgz#2ff49389bdf342a550c3596750ba2dde95a8f7d4"
   integrity sha1-L/STib3zQqVQw1lnULot3pWo99Q=
@@ -3178,12 +3178,12 @@ ember-cli-test-loader@^2.2.0:
   dependencies:
     ember-cli-babel "^6.8.1"
 
-ember-cli-uglify@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-uglify/-/ember-cli-uglify-2.0.0.tgz#b096727d7d1718acc9bfe5d1bc81ce26cafdf6ca"
-  integrity sha1-sJZyfX0XGKzJv+XRvIHOJsr99so=
+ember-cli-uglify@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-uglify/-/ember-cli-uglify-2.1.0.tgz#4a0641fe4768d7ab7d4807aca9924cc77c544184"
+  integrity sha512-lDzdAUfhGx5AMBsgyR54ibENVp/LRQuHNWNaP2SDjkAXDyuYFgW0iXIAfGbxF6+nYaesJ9Tr9AKOfTPlwxZDSg==
   dependencies:
-    broccoli-uglify-sourcemap "^2.0.0"
+    broccoli-uglify-sourcemap "^2.1.1"
     lodash.defaultsdeep "^4.6.0"
 
 ember-cli-valid-component-name@^1.0.0:
