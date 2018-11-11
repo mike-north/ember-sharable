@@ -46,7 +46,7 @@
   ],
   "dependencies": {
     "ember-cli-babel": "6.17.2",
-    "ember-cli-htmlbars": "2.0.5"
+    "ember-cli-htmlbars": "3.0.1"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
