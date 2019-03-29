@@ -45,7 +45,7 @@
     "opengraph"
   ],
   "dependencies": {
-    "ember-cli-babel": "7.7.0",
+    "ember-cli-babel": "7.7.3",
     "ember-cli-htmlbars": "3.0.1"
   },
   "ember-addon": {
